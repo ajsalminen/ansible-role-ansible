@@ -1,10 +1,10 @@
 ---
 
 - name: Checkout ansible from git
-  git: repo=git://github.com/ansible/ansible.git dest=/opt/ansible version=HEAD
+  git: repo=git://github.com/ansible/ansible.git dest=/opt/ansible version=v1.5.3
 
 - name: install ansible env-setup to profile.d
-  copy: src=ansible.sh dest=/etc/profile.d/ansible.sh mode=0755 owner=root group=root 
+  copy: src=ansible.sh dest=/etc/profile.d/ansible.sh mode=0755 owner=root group=root
 
 - name: install dependencies from apt and install pip
   apt: pkg={{ item }} state=present
@@ -14,5 +14,4 @@
     - build-essential
 
 - name: install dependencies from pip.
-  command: /usr/bin/pip install PyYAML Jinja2 paramiko 
-
+  command: /usr/bin/pip install PyYAML Jinja2 paramiko
