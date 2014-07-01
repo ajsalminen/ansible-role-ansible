@@ -15,3 +15,9 @@
 
 - name: install dependencies from pip.
   command: /usr/bin/pip install PyYAML Jinja2 paramiko
+
+- name: Install a configuration file for ansible
+  template: src=ansible.cfg.j2 dest=/etc/ansible/ansible.cfg
+
+- name: Set ansible roles path writeable by the dev
+  file: path=/opt/ansible-galaxy mode=0775 owner=root group=anttis state=directory
