@@ -1,7 +1,7 @@
 ---
 
 - name: Checkout ansible from git
-  git: repo=git://github.com/ansible/ansible.git dest=/opt/ansible version=v1.5.3
+  git: repo=git://github.com/ansible/ansible.git dest=/opt/ansible version=v1.6.6
 
 - name: install ansible env-setup to profile.d
   copy: src=ansible.sh dest=/etc/profile.d/ansible.sh mode=0755 owner=root group=root
