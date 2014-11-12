@@ -1,7 +1,7 @@
 ---
 
 - name: Checkout ansible from git
-  git: repo=git://github.com/ansible/ansible.git dest=/opt/ansible version=v1.6.6
+  git: repo=https://github.com/ansible/ansible.git dest={{ ansible_install_dir }} version={{ansible_get_version}} accept_hostkey=true
 
 - name: install ansible env-setup to profile.d
   copy: src=ansible.sh dest=/etc/profile.d/ansible.sh mode=0755 owner=root group=root
@@ -12,12 +12,24 @@
     - python-dev
     - python-pip
     - build-essential
+    - python-jinja2
+    - python-yaml
+    - python-paramiko
 
-- name: install dependencies from pip.
-  command: /usr/bin/pip install PyYAML Jinja2 paramiko
+# - name: install dependencies from pip.
+  # command: /usr/bin/pip install PyYAML Jinja2 paramiko
+
+- name: Create ansible config dir
+  file:
+    path: "{{ ansible_config_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 
 - name: Install a configuration file for ansible
   template: src=ansible.cfg.j2 dest=/etc/ansible/ansible.cfg
 
 - name: Set ansible roles path writeable by the dev
-  file: path=/opt/ansible-galaxy mode=0775 owner=root group=anttis state=directory
+  file: path=/opt/ansible-galaxy mode=0775 owner=root group={{ ansible_group }} state=directory
