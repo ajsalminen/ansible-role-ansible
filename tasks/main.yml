@@ -1,13 +1,7 @@
 ---
 
-- name: Checkout ansible from git
-  git: repo=https://github.com/ansible/ansible.git dest={{ ansible_install_dir }} version={{ansible_get_version}} accept_hostkey=true
-
-- name: install ansible env-setup to profile.d
-  copy: src=ansible.sh dest=/etc/profile.d/ansible.sh mode=0755 owner=root group=root
-
-- name: install dependencies from apt and install pip
-  apt: pkg={{ item }} state=present
+- name: install dependencies from apt and install pip.
+  apt: pkg={{ item }} state=present cache_valid_time={{APT_CACHE_VALID_TIME}}
   with_items:
     - python-dev
     - python-pip
@@ -15,6 +9,15 @@
     - python-jinja2
     - python-yaml
     - python-paramiko
+    - git
+
+- name: Checkout ansible from git
+  git: repo=https://github.com/ansible/ansible.git dest={{ ansible_install_dir }} version={{ansible_get_version}} accept_hostkey=true
+
+- name: install ansible env-setup to profile.d
+  copy: src=ansible.sh dest=/etc/profile.d/ansible.sh mode=0755 owner=root group=root
+
+
 
 # - name: install dependencies from pip.
   # command: /usr/bin/pip install PyYAML Jinja2 paramiko
@@ -26,7 +29,6 @@
     owner: root
     group: root
     mode: 0755
-
 
 - name: Install a configuration file for ansible
   template: src=ansible.cfg.j2 dest=/etc/ansible/ansible.cfg

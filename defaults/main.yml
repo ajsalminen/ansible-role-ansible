@@ -1,4 +1,5 @@
 ---
+APT_CACHE_VALID_TIME: 3600
 
 ansible_get_version: HEAD
 ansible_group: root
