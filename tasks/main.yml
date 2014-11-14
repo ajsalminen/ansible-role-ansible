@@ -1,7 +1,11 @@
 ---
 
 - name: install dependencies from apt and install pip.
-  apt: pkg={{ item }} state=present cache_valid_time={{APT_CACHE_VALID_TIME}}
+  apt:
+    pkg:"{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: "{{APT_CACHE_VALID_TIME}}"
   with_items:
     - python-dev
     - python-pip
