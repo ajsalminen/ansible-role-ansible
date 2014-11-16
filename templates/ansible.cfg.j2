@@ -16,6 +16,7 @@ ansible_managed =  ansible managed - DO NOT MODIFY!
 roles_path = {{ ansible_roles_path }}
 {% if ansible_extra_plugins is defined %}
 library = /opt/ansible-plugins/library:/opt/ansible-ssh-config/
+filter_plugins = /opt/drupal_filter_plugins
 {% endif %}
 
 [ssh_connection]
