@@ -6,3 +6,4 @@ ansible_group: root
 ansible_config_dir: /etc/ansible
 ansible_install_dir: /opt/ansible
 ansible_roles_path: /opt/ansible-galaxy
+ansible_setup_on_login: False

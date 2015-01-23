@@ -20,7 +20,11 @@
 
 - name: install ansible env-setup to profile.d
   copy: src=ansible.sh dest=/etc/profile.d/ansible.sh mode=0755 owner=root group=root
+  when: ansible_setup_on_login == True
 
+- name: Remove ansible env-setup from profile.d
+  file: path=/etc/profile.d/ansible.sh state=absent
+  when: ansible_setup_on_login == False
 
 
 # - name: install dependencies from pip.
