@@ -2,18 +2,17 @@
 
 - name: install dependencies from apt and install pip.
   apt:
-    pkg: "{{ item }}"
     state: present
     update_cache: yes
     cache_valid_time: "{{APT_CACHE_VALID_TIME}}"
-  with_items:
-    - python-dev
-    - python-pip
-    - build-essential
-    - python-jinja2
-    - python-yaml
-    - python-paramiko
-    - git
+    name:
+      - python-dev
+      - python-pip
+      - build-essential
+      - python-jinja2
+      - python-yaml
+      - python-paramiko
+      - git
 
 - name: Checkout ansible from git
   git: repo=https://github.com/ansible/ansible.git dest={{ ansible_install_dir }} version={{ansible_get_version}} accept_hostkey=true
