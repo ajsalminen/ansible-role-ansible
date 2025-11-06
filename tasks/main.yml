@@ -6,12 +6,12 @@
     update_cache: yes
     cache_valid_time: "{{APT_CACHE_VALID_TIME}}"
     name:
-      - python-dev
-      - python-pip
+      - python3-dev
+      - python3-pip
       - build-essential
-      - python-jinja2
-      - python-yaml
-      - python-paramiko
+      - python3-jinja2
+      - python3-yaml
+      - python3-paramiko
       - git
 
 - name: Checkout ansible from git
